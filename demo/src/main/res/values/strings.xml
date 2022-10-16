@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AndroidImageSlider</string>
+
+    <!-- Menu Item -->
+    <string name="custom_indicator">Custom Indicator</string>
+    <string name="custom_child_animation">ChildView Animation</string>
+    <string name="restore_default">Restore default</string>
+    <string name="github">GitHub</string>
+</resources>

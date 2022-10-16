@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.daimajia.slider.demo.MainActivity">
+    <item
+        android:id="@+id/action_custom_indicator"
+        android:orderInCategory="100"
+        android:title="@string/custom_indicator"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_custom_child_animation"
+        android:orderInCategory="100"
+        android:title="@string/custom_child_animation"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_restore_default"
+        android:orderInCategory="100"
+        android:title="@string/restore_default"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_github"
+        android:orderInCategory="100"
+        android:title="@string/github"
+        app:showAsAction="never"/>
+</menu>
