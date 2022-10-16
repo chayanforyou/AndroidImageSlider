@@ -1,0 +1,88 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+
+group = PUBLISH_GROUP_ID
+version = PUBLISH_VERSION
+
+ext["ossrhUsername"] = ''
+ext["ossrhPassword"] = ''
+ext["signingKey"] = ''
+ext["signingPassword"] = ''
+
+File secretPropsFile = project.rootProject.file('local.properties')
+if (secretPropsFile.exists()) {
+    Properties p = new Properties()
+    p.load(new FileInputStream(secretPropsFile))
+    p.each { name, value -> ext[name] = value }
+}
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    if (project.plugins.findPlugin("com.android.library")) {
+        from android.sourceSets.main.java.srcDirs
+        from android.sourceSets.main.kotlin.srcDirs
+    } else {
+        from sourceSets.main.java.srcDirs
+        from sourceSets.main.kotlin.srcDirs
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId PUBLISH_GROUP_ID
+                artifactId PUBLISH_ARTIFACT_ID
+                version PUBLISH_VERSION
+
+                from components.release
+                artifact androidSourcesJar
+
+                pom {
+                    name = 'AndroidImageSlider Library'
+                    description = 'An amazing and convenient Android image slider.'
+                    url = 'https://github.com/chayanforyou/AndroidImageSlider'
+
+                    licenses {
+                        license {
+                            name = 'MIT License'
+                            url = 'http://opensource.org/licenses/MIT'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'chayanforyou'
+                            name = 'Chayan Mistry'
+                            email = 'chayanforyou@yahoo.com'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:git://github.com/chayanforyou/AndroidImageSlider.git'
+                        developerConnection = 'scm:git:ssh://github.com:chayanforyou/AndroidImageSlider.git'
+                        url = 'https://github.com/chayanforyou/AndroidImageSlider.git'
+                    }
+                }
+            }
+        }
+        repositories {
+            maven {
+                name = "sonatype"
+
+                def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+                credentials {
+                    username ossrhUsername
+                    password ossrhPassword
+                }
+            }
+        }
+    }
+
+    signing {
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        sign publishing.publications
+    }
+}

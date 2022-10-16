@@ -29,3 +29,4 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
 }
+apply from: './publish-mavencentral.gradle'
