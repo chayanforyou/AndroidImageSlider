@@ -1,5 +1,10 @@
 # Android Image Slider
 
+[![Releases](https://img.shields.io/github/release/chayanforyou/AndroidImageSlider/all.svg?style=flat-square)](https://github.com/chayanforyou/AndroidImageSlider/releases)
+[![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
+![Language](https://img.shields.io/badge/language-Kotlin-orange.svg)
+[![PRWelcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/chayanforyou/AndroidImageSlider/pulls)
+
 Forked from https://github.com/daimajia/AndroidImageSlider which was getting very old. I needed to get a project working that had used this a while back but was now incompatible with modern build tools and android libs.
 
 ---
@@ -15,8 +20,17 @@ You can easily load images from an internet URL, drawable, or file. And there ar
 ## Setup
 
 ```groovy
+allprojects {
+   repositories {
+       mavenCentral() // For ImageSLider library, this line is enough
+       maven { url "https://jitpack.io" } // Although, it has been published on jitpack as well
+   }
+}
+```
+
+```groovy
 dependencies {
-    implementation 'io.github.chayanforyou:slider:1.0.0'
+    implementation 'com.github.chayanforyou:AndroidImageSlider:1.0.0'
 }
 ```
 
