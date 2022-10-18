@@ -20,17 +20,8 @@ You can easily load images from an internet URL, drawable, or file. And there ar
 ## Setup
 
 ```groovy
-allprojects {
-   repositories {
-       mavenCentral() // For ImageSLider library, this line is enough
-       maven { url "https://jitpack.io" } // Although, it has been published on jitpack as well
-   }
-}
-```
-
-```groovy
 dependencies {
-    implementation 'com.github.chayanforyou:AndroidImageSlider:1.0.0'
+    implementation 'io.github.chayanforyou:slider:1.0.0'
 }
 ```
 
